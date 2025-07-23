@@ -1,0 +1,23 @@
+---
+services:
+  homeassistant:
+    image: lscr.io/linuxserver/homeassistant:latest
+    container_name: homeassistant
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Kenya
+    volumes:
+      - homeassistant_dir:/config
+    ports:
+      - "8123:8123"
+    restart: unless-stopped
+    networks:
+      - homeassistant_network
+
+volumes:
+  homeassistant_dir:
+networks:
+  homeassistant_network:
+    driver: bridge
+    name: homeassistant_network

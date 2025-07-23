@@ -1,0 +1,35 @@
+services:
+  influxdb:
+    container_name: influxdb
+    image: influxdb:2
+    ports: "8086:8086"
+    environments:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: brian
+      DOCKER_INFLUXDB_INIT_PASSWORD: password
+      DOCKER_INFLUXDB_INIT_ORG: lab23
+      DOCKER_INFLUXDB_INIT_BUCKET: home
+    volumes:
+      - influxdb_database1_dir:/var/lib/influxdb
+      - influxdb_database2_dir:/var/lib/influxdb2
+      - influxdb_config_dir:/etc/influxdb2
+    network:
+      - monitoring_network
+
+  telegraf:
+    container_name: telegraf
+    image: telegraf
+    volumes:
+      - telegraf_dir: /hostfs:ro
+      - ./config/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    network:
+      - monitoring_network
+
+networks:
+  monitoring_network:
+
+volumes:
+  - influxdb_config_dir:
+  - influxdb_database1_dir:
+  - influxdb_database2_dir:
+  - telegraf_dir:

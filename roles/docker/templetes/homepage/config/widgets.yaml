@@ -1,0 +1,16 @@
+# Widget settings
+widgets:
+  - resources:
+      cpu: true
+      memory: true
+      disk: true
+      uptime: true
+  - search:
+      provider: duckduckgo
+      focus: false
+  - datetime:
+      locale: en-US
+      format:
+        dateStyle: long
+        timeStyle: short
+      refreshInterval: 60000

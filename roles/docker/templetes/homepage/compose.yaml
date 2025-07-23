@@ -1,0 +1,22 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - ./config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - dashboard_network
+    labels:
+      - "consul.service.name=homepage"
+      - "consul.service.tags=web"
+      - "consul.service.port=3000"
+      - "consul.check.http=/"
+      - "consul.check.interv l=15s"
+      - "consul.check.timeout=5s"
+
+networks:
+  dashboard_network:
+    driver: bridge

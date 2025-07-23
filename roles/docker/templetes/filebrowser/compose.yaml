@@ -1,0 +1,10 @@
+services:
+  filebrowser:
+    container_name: filebrowser
+    image: filebrowser/filebrowser
+    restart: unless-stopped
+    volumes:
+      - /mnt/shared:/srv
+      - ./data/filebrowser.db:/database.db
+    ports:
+      - "8011:80"

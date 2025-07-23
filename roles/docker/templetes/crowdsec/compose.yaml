@@ -1,0 +1,20 @@
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    environment:
+      - GID=1000
+      - UID=1000
+      - COLLECTIONS=crowdsecurity/linux
+    volumes:
+      - ./crowdsec/data:/var/lib/crowdsec/data
+      - ./crowdsec/config:/etc/crowdsec
+      - ./crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - /var/log:/var/log:ro
+    restart: unless-stopped
+    networks:
+      - crowdsec_network
+
+networks:
+  crowdsec_network:
+    driver: bridge

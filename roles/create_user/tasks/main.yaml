@@ -1,0 +1,66 @@
+---
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Make sure the ssh key directory exists
+  local_action:
+    module: file
+    path: "{{ssh_key_dir}}/{{username}}"
+    state: directory
+    mode: "0700"
+
+- name: Generate SSH key pair locally for users
+  local_action:
+    module: openssh_keypair
+    path: "{{ ssh_key_dir }}/{{username}}/{{ ssh_key_name }}"
+    type: rsa
+    size: 4096
+    state: present
+
+- name: Create users
+  user:
+    name: "{{ username }}"
+    groups: sudo
+    shell: /bin/bash
+    create_home: yes
+
+- name: Create optwriters group
+  group:
+    name: optwriters
+    state: present
+
+- name: Change group ownership of /opt
+  file:
+    path: /opt
+    owner: root
+    group: optwriters
+    state: directory
+    mode: "0775"
+
+- name: Add users to docker group
+  user:
+    name: "{{ username }}"
+    groups: docker,optwriters
+    append: yes
+
+- name: Add SSH keys for users
+  authorized_key:
+    user: "{{ username }}"
+    key: "{{ lookup('file', ssh_key_dir + '/' + username +'/'+ ssh_key_name +'.pub')}}"
+
+- name: Allow sudo without password for new users
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "^{{ username }} ALL="
+    line: "{{ username }} ALL=(ALL) NOPASSWD: ALL"
+    validate: "visudo -cf %s"
+
+- name: Add user to inventory
+  add_host:
+    name: "{{host_name}}"
+    ansible_host: "{{ server_ip }}"
+    ansible_user: "{{username}}"
+    ansible_ssh_private_key_file: "{{ssh_key_dir}}/{{username}}/{{ssh_key_name}}"

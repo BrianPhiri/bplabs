@@ -1,0 +1,8 @@
+- name: Check if docker network exists
+  shell: docker network ls | grep -w {{ network_name }} || true
+  register: network_exists
+  ignore_errors: true
+
+- name: Creating network {{ network_name }}
+  shell: docker network create --driver bridge {{ network_name }}
+  when: network_exists.stdout == ""

@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: example_user
+      POSTGRES_PASSWORD: example_pass
+      POSTGRES_DB: example_db    
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1g"
+        reservations:
+          cpus: "0.5"
+          memory: "512m"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8088:8080"
+
+volumes:
+  postgres_data:

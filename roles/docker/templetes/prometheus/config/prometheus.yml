@@ -1,0 +1,42 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval:
+    15s
+
+    #rule_files:
+    #  - /etc/prometheus/rules.yml
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+  # Monitoring host systems (VMs)
+  - job_name: "node"
+    static_configs:
+      - targets: ["192.168.100.70:9100"]
+        labels:
+          instance: "Atlas"
+      - targets: ["192.168.100.71:9100"]
+        labels:
+          instance: "Pihole"
+      - targets: ["192.168.100.72:9100"]
+        labels:
+          instance: "Media"
+      - targets: ["192.168.100.73:9100"]
+        labels:
+          instance: "Arr"
+  # Monitoring Docker containers
+  - job_name: "cadvisor"
+    static_configs:
+      - targets: ["192.168.100.70:8081"]
+        labels:
+          instance: "Atlas"
+      - targets: ["192.168.100.71:8081"]
+        labels:
+          instance: "Pihole"
+      - targets: ["192.168.100.72:8081"]
+        labels:
+          instance: "Media"
+      - targets: ["192.168.100.73:8081"]
+        labels:
+          instance: "Arr"

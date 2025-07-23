@@ -1,0 +1,3 @@
+username: "brian"
+ssh_key_name: "brian_ssh_key"
+ssh_key_dir: "{{playbook_dir}}/keys/servers"

@@ -1,0 +1,30 @@
+title: MyHomeLab
+
+# Theme settings
+theme: dark
+color: gray
+
+headerStyle: clean
+
+# Layout settings
+layout:
+  Media:
+    style: row
+    columns: 4
+  Downloader:
+    style: row
+    columns: 4
+  Prime:
+    style: row
+    columns: 4
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: true
+  hideVisitURL: true
+  provider: google # google, duckduckgo, bing, baidu, brave or custom
+
+hideVersion: true
+
+showStats: true

@@ -1,0 +1,9 @@
+- name: Copy {{ app_name }} configs
+  ansible.builtin.copy:
+    src: ../templetes/{{ app_name }}/
+    dest: /opt/docker/{{ app_name }}
+
+- name: Run {{ app_name }}
+  shell: docker compose up -d --force-recreate
+  args:
+    chdir: /opt/docker/{{ app_name }}

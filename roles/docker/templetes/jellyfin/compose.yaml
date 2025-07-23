@@ -1,0 +1,36 @@
+---
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Kenya
+    volumes:
+      - jellyfin_dir:/config
+      - /mnt/shared/media/tvseries:/data/tvshows
+      - /mnt/shared/media/movies:/data/movies
+    ports:
+      - "8096:8096"
+      - "8920:8920"
+    restart: unless-stopped
+    networks:
+      jellyfin_network:
+
+  jellyfin_vue:
+    container_name: jellyfin_vue
+    image: jellyfin/jellyfin-vue:unstable
+    restart: unless-stopped
+    ports:
+      - "8083:80"
+    networks:
+      jellyfin_network:
+
+networks:
+  jellyfin_network:
+    driver: bridge
+    name: jellyfin_network
+
+volumes:
+  jellyfin_dir:

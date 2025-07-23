@@ -1,0 +1,249 @@
+http:
+  routers:
+    proxmox:
+      entryPoints:
+        - "https"
+      rule: "Host(`proxmox.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: proxmox
+    qbittorrent:
+      entryPoints:
+        - "https"
+      rule: "Host(`torrent.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: qbittorrent
+    prowlarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`prowlarr.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: prowlarr
+    radarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`radarr.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: radarr
+    sonarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`sonarr.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: sonarr
+    readarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`readarr.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: readarr
+    kavita:
+      entryPoints:
+        - "https"
+      rule: "Host(`kavita.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: kavita
+    jellyfin:
+      entryPoints:
+        - "https"
+      rule: "Host(`jellyfin.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: jellyfin
+    jellyseerr:
+      entryPoints:
+        - "https"
+      rule: "Host(`jellyseerr.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: jellyseerr
+    calibre:
+      entryPoints:
+        - "https"
+      rule: "Host(`calibre.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: calibre
+
+    portainer:
+      entryPoints:
+        - "https"
+      rule: "Host(`portainer.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: portainer
+    homeassistant:
+      entryPoints:
+        - "https"
+      rule: "Host(`my.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: homeassistant
+    homepage:
+      entryPoints:
+        - "https"
+      rule: "Host(`homeassistant.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: homepage
+
+    grafana:
+      entryPoints:
+        - "https"
+      rule: "Host(`grafana.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: grafana
+    prometheus:
+      entryPoints:
+        - "https"
+      rule: "Host(`prometheus.home.brianphiri.online`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: prometheus
+
+  services:
+    proxmox:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.100.20:8006"
+        passHostHeader: true
+    qbittorrent:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.73:8081/"
+        passHostHeader: true
+    prowlarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.73:9696"
+        passHostHeader: true
+    radarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.73:7878"
+        passHostHeader: true
+    sonarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.73:8989"
+        passHostHeader: true
+    readarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.73:8787"
+        passHostHeader: true
+
+    kavita:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.72:5000"
+        passHostHeader: true
+    jellyfin:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.72:8096"
+        passHostHeader: true
+    jellyseerr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.73:5055"
+        passHostHeader: true
+    calibre:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.72:8080"
+        passHostHeader: true
+    portainer:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.100.70:9443"
+        passHostHeader: true
+    homeassistant:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.70:8123"
+        passHostHeader: true
+    homepage:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.70:3000"
+        passHostHeader: true
+    grafana:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.70:3000"
+        passHostHeader: true
+    prometheus:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.70:9090"
+        passHostHeader: true
+
+  middlewares:
+    https-redirectscheme:
+      redirectScheme:
+        scheme: https
+        permanent: true
+    default-headers:
+      headers:
+        frameDeny: true
+        browserXssFilter: true
+        contentTypeNosniff: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 15552000
+        customFrameOptionsValue: SAMEORIGIN
+        customRequestHeaders:
+          X-Forwarded-Proto:
+            https
+
+            #    default-whitelist:
+            #      ipAllowList:
+            #        sourceRange:
+            #          - "10.0.0.0/8"
+            #          - "192.168.0.0/16"
+            #          - "172.16.0.0/12"
+
+    secured:
+      chain:
+        middlewares:
+          #        - default-whitelist
+          - default-headers

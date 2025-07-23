@@ -1,0 +1,23 @@
+services:
+  kavita:
+    image: lscr.io/linuxserver/kavita:latest
+    container_name: kavita
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Kenya
+    volumes:
+      - kavita_dir:/config
+      - /mnt/shared/media/books:/data #optional
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    networks:
+      kavita_network:
+
+networks:
+  kavita_network:
+    driver: bridge
+    name: kavita_network
+volumes:
+  kavita_dir:

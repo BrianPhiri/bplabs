@@ -1,0 +1,18 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:2.27.1
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+      - "9443:9443"
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - portainer_data:/data
+
+volumes:
+  portainer_data:

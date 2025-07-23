@@ -1,0 +1,28 @@
+---
+#- name: Apply Terraform
+#  hosts: localhost
+#  tasks:
+#    - name: Run terraform init
+#      ansible.builtin.command:
+#        cmd: terraform init
+#      args:
+#        chdir: tf
+#
+#    - name: Run terraform apply
+#      ansible.builtin.command:
+#        cmd: terraform apply -auto-approve
+#      args:
+#        chdir: tf
+
+- name: Configure containers
+  hosts: all
+  #become: yes
+  become_method: sudo
+  roles:
+    - role: install_docker
+      tags: docker_config
+    - role: create_user
+      tags: user_config
+      vars:
+        server_ip: "{{ ansible_host }}"
+        host_name: media

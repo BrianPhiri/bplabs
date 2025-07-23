@@ -1,0 +1,23 @@
+services:
+  consul-server:
+    image: hashicorp/consul:latest
+    container_name: consul-server
+    ports:
+      - "8500:8500"
+      - "8601:8601"
+      - "8300:8300"
+      - "8301:8301"
+      - "8302:8302"
+    command: >
+      agent -server 
+      -ui 
+      -bootstrap-expect=1 
+      -client=0.0.0.0 
+      -advertise=192.168.100.71
+      -data-dir=/consul/data
+      -node=consul-server
+    networks:
+      - consul_network
+networks:
+  consul_network:
+    driver: bridge

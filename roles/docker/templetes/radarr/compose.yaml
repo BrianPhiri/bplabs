@@ -1,0 +1,28 @@
+---
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Africa/Kenya
+    volumes:
+      - radarr_dir:/config
+      - /mnt/shared/media/movies:/movies #optional
+      - /mnt/shared/media/download-client-downloads:/downloads #optional
+    ports:
+      - "7878:7878"
+    restart: unless-stopped
+    networks:
+      - downloader_network
+      - oversee_network
+
+networks:
+  downloader_network:
+    external: true
+  oversee_network:
+    external: true
+
+volumes:
+  radarr_dir:

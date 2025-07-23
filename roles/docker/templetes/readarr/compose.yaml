@@ -1,0 +1,25 @@
+---
+services:
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Africa/Kenya
+    volumes:
+      - readarr_dir:/config
+      - /mnt/shared/media/books:/books #optional
+      - /mnt/shared/media/downloadclient-downloads:/downloads #optional
+    ports:
+      - "8787:8787"
+    restart: unless-stopped
+    networks:
+      downloader_network:
+
+networks:
+  downloader_network:
+    external: true
+
+volumes:
+  readarr_dir:

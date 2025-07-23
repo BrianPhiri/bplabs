@@ -1,0 +1,15 @@
+lxc_containers = [
+  {
+    hostname    = "MyContainers"
+    storage     = "local-lvm"
+    size        = "100G"
+    ostemplate  = "local:vztmpl/ubuntu-24.10-standard_24.10-1_amd64.tar.zst"
+    password    = "your_password_here"
+    username    = "ubuntu"
+    target_node = "proxmox-node"
+    vmid = "100"
+    memory = 4288
+    swap =  1024
+    cores = 12
+  }
+  ]

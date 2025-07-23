@@ -1,0 +1,19 @@
+services:
+  gotify:
+    image: gotify/server
+    container_name: gotify
+    restart: unless-stopped
+    ports:
+      - "85:80"
+    environment:
+      - TZ=Africa/Kenya
+    volumes:
+      - gotify_dir:/app/data
+    networks:
+      - monitoring_network
+volumes:
+  gotify_dir:
+
+networks:
+  monitoring_network:
+    external: true
