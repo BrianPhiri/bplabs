@@ -5,7 +5,7 @@
         widget:
           type: homeassistant
           url: "https://my.home.brianphiri.online"
-          key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwZTZkYjUyYzFlZGM0NzY0OTg2ZDY1YzgyY2EyNTA5ZCIsImlhdCI6MTc0MDgxNzQwNCwiZXhwIjoyMDU2MTc3NDA0fQ.3dr85snDDyaBTtvDsRfKot-xyvTALAEIEFV-RXFSkqM
+          key: .
           custom:
             - state: sensor.total_power
             - state: sensor.total_energy_today
@@ -22,7 +22,7 @@
           type: portainer
           url: https://portainer.home.brianphiri.online
           env: 1
-          key: ptr_lCtztKbNksXEZvvbDdFu8LQoY+D69rFwJVkS0wwMvyc=
+          key:
 
 - Media:
     - JellyFin:
@@ -32,7 +32,7 @@
           type: jellyfin
           icon: "https://jellyfin.org/images/logo.svg"
           url: https://jellyfin.home.brianphiri.online
-          key: def49f17c08d43d8867a451742321a8f
+          key:
           enableBlocks: true # optional, defaults to false
           enableNowPlaying: true # optional, defaults to true
           enableUser: true # optional, defaults to false
@@ -44,7 +44,7 @@
         widget:
           type: jellyseerr
           url: http://jellyseerr.host.or.ip
-          key: MTc0MDMyMDA2OTY4M2U4ZWMwYWY5LWE3ZmUtNDA3ZC1hMTRlLWYxNTgyMjA5MDE0ZQ==
+          key: ==
     - Kavita:
         href: "https://kavita.home.brianphiri.online"
         widget:
@@ -76,7 +76,7 @@
         widget:
           type: sonarr
           url: https://sonarr.home.brianphiri.online
-          key: 2ffeec8edd954477a230f189d2352863
+          key:
           enableQueue: true # optional, defaults to false
     - Radarr:
         href: "https://radarr.home.brianphiri.online"
@@ -84,7 +84,7 @@
         widget:
           type: radarr
           url: https://radarr.home.brianphiri.online
-          key: 85ccbde2b40d453193be3b8f31e6be41
+          key:
           enableQueue: true # optional, defaults to false
     - Readarr:
         href: "https://readarr.home.brianphiri.online"
@@ -92,14 +92,14 @@
         widget:
           type: readarr
           url: https://readarr.home.brianphiri.online
-          key: c56c08646a8248f5ba801a2c6235bb4a
+          key:
     - Prowlarr:
         href: "https://prowlarr.home.brianphiri.online"
         icon: https://raw.githubusercontent.com/Prowlarr/Prowlarr/develop/Logo/128.png
         widget:
           type: prowlarr
           url: https://prowlarr.home.brianphiri.online
-          key: 00d56c944625483c8c70e6a17539c6f5
+          key:
 
 - Network:
     - Adguard:

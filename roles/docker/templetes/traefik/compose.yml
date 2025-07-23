@@ -11,7 +11,7 @@ services:
       - 443:443
     environment:
       #CF_DNS_API_TOKEN_FILE: /run/secrets/cf_api_token # note using _FILE for docker secrets
-      CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN} # if using .env
+      CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
       TRAEFIK_DASHBOARD_CREDENTIALS: ${TRAEFIK_DASHBOARD_CREDENTIALS}
     env_file: .env # use .env
     volumes:
